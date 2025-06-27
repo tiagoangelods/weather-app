@@ -2,5 +2,21 @@
   "extends": "./tsconfig.base.json",
   "compileOnSave": false,
   "files": [],
-  "references": []
+  "references": [
+    {
+      "path": "./react-client-e2e"
+    },
+    {
+      "path": "./react-client"
+    },
+    {
+      "path": "./express-server-e2e"
+    },
+    {
+      "path": "./express-server"
+    },
+    {
+      "path": "./shared-lib"
+    }
+  ]
 }

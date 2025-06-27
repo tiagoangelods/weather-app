@@ -1,90 +1,158 @@
-# WeatherApp
+# My Journey solving this code challenge: Weather App
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+## Acceptance Criteria 
+- A user can search for any city and get the weather forecast. 
+- In the search result, a user can see the current weather status and the weather for the next 5 days. 
+- A polling feature that pings the weather API every 10 minutes for any updates (there may be none), and if there are, reflect those changes on the application.
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+The above acceptance criteria is the minimum requirement for the challenge. Extra features provided by a bonus point.
+  - A user always will see the current local time and the time zone of the searched city.
+  - A user can see the weather forecast in Celsius and Fahrenheit.
+  - A user can see an image of the searched city reflecting the current weather conditions.
+    - The image should be fetched from an external API.
+    - The image should be of a turistic place or interesting place in the searched city.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## Main stack
+- React (vite-bundler)
+- TypeScript
+- Node.js (express)
 
-## Finish your remote caching setup
+## Testing stack
+- Jest
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/yGhKFN2R7z)
+## Bonus stack
+- Nx for monorepo management
+- Tailwind CSS for styling faster
+
+## How to run the project
+1. Clone the repository.
+    ```bash
+    git clone <repository-url>
+    ```
+2. Navigate to the project directory.
+    ```bash
+    cd weather-app
+    ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+   this command produces the following output:
+   ```bash
+    npx nx run-many --target=serve --all=true --parallel=3 --verbose=true
+    ```
+
+# Why monorepo?
+- Monorepo allows us to manage multiple projects in a single repository, making it easier to share code, manage dependencies, and maintain consistency across projects.
+- It simplifies the development process by allowing us to work on multiple applications and libraries simultaneously, reducing the overhead of managing separate repositories.
+- It allows running commands across multiple projects, such as building, testing, and serving applications, in a single command.
 
 
-## Generate a library
+# Breakdown of the project structure
+- `express-server`: Contains the Express server code that serves the API endpoints for fetching weather data and images.
+- `react-client`: Contains the React application code that provides the user interface for searching and displaying weather information.
+- `shared-lib`: Contains entities and utilities shared between the server and client, such as types and interfaces.
 
-```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+# How to run the tests
+1. Navigate to the project directory.
+   ```bash
+   cd weather-app
+   ```
+2. Run the tests:
+   ```bash
+   npm run test
+   ```
+   this command produces the following output:
+   ```bash
+   npx nx run-many --target=test --all=true --parallel=3 --verbose=true
+   ```
+
+# Planning and Design
+- What need to have Visualized :
+  - A search input for the user to enter a city name.
+  - A display area for the current weather status and the next 5 days forecast.
+  - A polling mechanism to update the weather data every 10 minutes (or none).
+  - A display area for the current local time and time zone of the searched city. (Bonus)
+  - Options to toggle between Celsius and Fahrenheit. (Bonus)
+  - An image of a tourist or interesting place in the searched city. (Bonus)
+- What need to have Provided by
+  - A weather API to fetch current weather data and forecasts. `/api/weather?city={cityName}`
+  - An image API to fetch images of the searched city. `/api/image?city={cityName}` (Bonus)
+  - A time zone API to fetch the local time and time zone of the searched city. `/api/timezone?city={cityName}` (Bonus)
+
+# Thinking as a UI/UX view
+```markdown
+---------------------------------------------------------------------------------
+| Weather Now                                   Goiânia, GMT-3 🕑 current time  |
+---------------------------------------------------------------------------------
+| [🔍 Search for a city...]                        [ °C  /  °F / Both Selector ]|
+---------------------------------------------------------------------------------
+| Sydney, Australia             🕐 21:32  |  GMT+10                             |
+| [==== Wide City Photo: Sydney Opera House / Harbour Bridge ====]              |
+| "Discover Sydney"                                                             |
+---------------------------------------------------------------------------------
+| [ ☀️ 18°C ]    Partly Cloudy           Feels like: 17°C                       |
+| Humidity: 60%      Wind: 12km/h                                               |
+---------------------------------------------------------------------------------
+| 5-Day Forecast:                                                               |
+| [Wed][🌤️][20°/13°][Sunny]  [Thu][🌧️][18°/12°][Showers]  ... (carousel/grid)   |
+---------------------------------------------------------------------------------
+| Last updated: 2 mins ago  |  Auto-refreshes every 10 min  |  [🔄 Refresh]     |
+---------------------------------------------------------------------------------
+```
+## mockup
+![Mockup](./assets/mockup.png)
+
+## (TODO) react-client folder structure
+```markdown
+weather-app/
+  └── react-client/
+      ├── src/
+      │   ├── components/
+      │   │   ├── CitySearch
+      │   │   ├── WeatherDisplay
+      │   │   ├── WeatherForecast
+      │   │   ├── TimeZoneDisplay
+      │   │   ├── TemperatureToggle
+      ├── public/
+      │   
 ```
 
-## Run tasks
+# Thinking as a server side
+```markdown
+---------------------------------------------------------------------------------
+| Express Server API Endpoints                                                   |
+---------------------------------------------------------------------------------
+| GET /api/weather?city={cityName}                                               |
+|   - Fetches current weather and 5-day forecast for the specified city.          |
+|   - Returns JSON response with weather data.                                    |
+---------------------------------------------------------------------------------
+| GET /api/image?city={cityName}                                                 |
+|   - Fetches an image of a tourist or interesting place in the specified city.
+|   - Returns JSON response with image URL.                                        |
+---------------------------------------------------------------------------------
+| GET /api/timezone?city={cityName}                                              |
+|   - Fetches the local time and time zone for the specified city.                 |
+|   - Returns JSON response with time and timezone data.                           |
+---------------------------------------------------------------------------------
+| Polling Mechanism                                                              |
+|   - Clients can configure to update weather data every 10 minutes or any time.           |
+|   - Clients can request the latest data at any time.                             
+---------------------------------------------------------------------------------
+``` 
 
-To build the library use:
-
-```sh
-npx nx build pkg1
+## (TODO) express-server folder structure
+```markdown
+weather-app/
+  └── express-server/
+      ├── src/
+      │   ├── gateways/
+      │   └── services/
+          └── infra
 ```
 
-To run any task with Nx use:
-
-```sh
-npx nx <target> <project-name>
-```
-
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
-
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Versioning and releasing
-
-To version and release the library use
-
-```
-npx nx release
-```
-
-Pass `--dry-run` to see what would happen without actually releasing the library.
-
-[Learn more about Nx release &raquo;](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Keep TypeScript project references up to date
-
-Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
-
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
-
-```sh
-npx nx sync
-```
-
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
-
-```sh
-npx nx sync:check
-```
-
-[Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
-
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/nx-api/js?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+## ()

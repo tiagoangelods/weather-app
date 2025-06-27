@@ -1,0 +1,26 @@
+{
+  "name": "@weather-app/express-server-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@weather-app/express-server"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "express-server-e2e/jest.config.ts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@weather-app/express-server:build",
+          "@weather-app/express-server:serve"
+        ]
+      }
+    }
+  }
+}
