@@ -8,11 +8,8 @@ describe('App', () => {
     expect(baseElement).toBeTruthy();
   });
 
-  it('should have a greeting as the title', () => {
-    const { getAllByText } = render(<App />);
-    expect(
-      getAllByText(new RegExp('Welcome @weather-app/react-client', 'gi'))
-        .length > 0
-    ).toBeTruthy();
+  it('should have a Weather app text', () => {
+    const AppComponent = render(<App />);
+    expect(AppComponent.getByText('Weather app')).toBeTruthy();
   });
 });

@@ -1,9 +1,8 @@
-import NxWelcome from './nx-welcome';
 
 export function App() {
   return (
     <div>
-      <NxWelcome title="@weather-app/react-client" />
+      <p>Weather app</p>
     </div>
   );
 }
