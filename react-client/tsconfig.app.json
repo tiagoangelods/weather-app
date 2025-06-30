@@ -11,9 +11,7 @@
       "@nx/react/typings/image.d.ts",
       "vite/client"
     ],
-    "rootDir": "src",
-    "module": "esnext",
-    "moduleResolution": "bundler"
+    "rootDir": "./src",
   },
   "exclude": [
     "out-tsc",
@@ -28,5 +26,5 @@
     "src/**/*.test.jsx",
     "jest.config.ts"
   ],
-  "include": ["src/**/*.js", "src/**/*.jsx", "src/**/*.ts", "src/**/*.tsx"]
+  "include": ["src/**/*.{js,jsx,ts,tsx}"]
 }

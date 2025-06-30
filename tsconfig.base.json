@@ -16,5 +16,9 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
+    "paths": {
+      "@weather-app/shared-lib": ["../shared-lib/src/index.ts"],
+      "@weather-app/shared-lib/*": ["../shared-lib/src/*"]
+    }
   }
 }

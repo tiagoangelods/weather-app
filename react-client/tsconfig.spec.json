@@ -3,17 +3,18 @@
   "compilerOptions": {
     "outDir": "./out-tsc/jest",
     "jsx": "react-jsx",
+    "lib": ["dom", "esnext"],
     "types": [
       "jest",
       "node",
       "@nx/react/typings/cssmodule.d.ts",
       "@nx/react/typings/image.d.ts"
     ],
-    "module": "esnext",
-    "moduleResolution": "bundler"
   },
   "include": [
     "jest.config.ts",
+    "src//*.{tsx,ts,js,jsx}",
+    "src/*.{ts,tsx,js,jsx}",
     "src/**/*.test.ts",
     "src/**/*.spec.ts",
     "src/**/*.test.tsx",

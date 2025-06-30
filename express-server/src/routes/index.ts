@@ -1,0 +1,1 @@
+export {default as weatherRouter} from './weather.route';

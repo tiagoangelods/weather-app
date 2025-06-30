@@ -2,17 +2,16 @@
  * This is not a production server yet!
  * This is only a minimal backend to get started.
  */
-
+import swaggerUi from 'swagger-ui-express';
+import {swaggerSpec} from './utils/swagger';
 import express from 'express';
-import * as path from 'path';
+import {weatherRouter} from './routes';
 
 const app = express();
 
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.get('/api', (req, res) => {
-  res.send({ message: 'Welcome to express-server!' });
-});
+app.use('/api', weatherRouter)
 
 const port = process.env.PORT || 3333;
 const server = app.listen(port, () => {
