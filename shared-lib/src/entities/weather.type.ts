@@ -5,7 +5,9 @@ export type currentWeather = {
   feelsLike?: number;
   humidity?: number;
   windSpeed?: number;
-  datetime?: number
+  datetime?: number;
+  condition?: string;
+  conditionDescription?: string;
 }
 
 export type forecastWeather = Array<currentWeather>;

@@ -5,9 +5,13 @@
 import swaggerUi from 'swagger-ui-express';
 import {swaggerSpec} from './utils/swagger';
 import express from 'express';
+import cors from 'cors';
 import {weatherRouter} from './routes';
 
 const app = express();
+app.use(cors({
+  origin: 'http://localhost:3000', // Replace with your frontend URL/port
+}))
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 

@@ -11,7 +11,7 @@
       "@nx/react/typings/image.d.ts",
       "vite/client"
     ],
-    "rootDir": "./src",
+    "rootDir": "./src"
   },
   "exclude": [
     "out-tsc",
@@ -26,5 +26,10 @@
     "src/**/*.test.jsx",
     "jest.config.ts"
   ],
-  "include": ["src/**/*.{js,jsx,ts,tsx}"]
+  "include": ["src/**/*.{js,jsx,ts,tsx}"],
+  "references": [
+    {
+      "path": "../shared-lib/tsconfig.lib.json"
+    }
+  ]
 }

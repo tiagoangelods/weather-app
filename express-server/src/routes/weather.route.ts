@@ -36,6 +36,7 @@
  */
 
 import express from 'express';
+import { openWeatherTranslator } from '../utils/openWeather.translator';
 import { getWeatherAdapter } from '../services/weather.service';
 
 const router = express.Router();
@@ -50,24 +51,10 @@ router.get('/weather', async (req, res) => {
     const serviceProvider = getWeatherAdapter(String(provider));
     const current = await serviceProvider.getCurrentWeather(String(city));
     const forecast = await serviceProvider.getForecast(String(city));
-    return res.json({ current, forecast });
+    return res.json(openWeatherTranslator({ current, forecast }));
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
 });
-
-// router.get('/weather/byLatLon', async (req, res) => {
-//   const { lat, lon, provider = 'openWeather' } = req.query;
-//   if (!lat || !lon) return res.status(400).json({ error: 'Latitude and Longitude required' });
-
-//   try {
-//     const serviceProvider = getWeatherAdapter(String(provider));
-//     const current = await serviceProvider.getCurrentWeatherByLatLon(Number(lat), Number(lon));
-//     const forecast = await serviceProvider.getForecastByLatLon(Number(lat), Number(lon));
-//     res.json({ current, forecast });
-//   } catch (err: any) {
-//     res.status(500).json({ error: err.message });
-//   }
-// });
 
 export default router;

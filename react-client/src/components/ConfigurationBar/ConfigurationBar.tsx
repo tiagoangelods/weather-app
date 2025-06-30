@@ -1,5 +1,5 @@
 import {RefreshCcw} from 'lucide-react'
-import { WrapperBar } from '@/components';
+import WrapperBar from '../common/WrapperBar';
 
 export default function ConfigurationBar() {
   return (

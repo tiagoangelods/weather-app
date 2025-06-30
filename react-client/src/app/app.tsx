@@ -1,19 +1,18 @@
 import { AppBar, SearchBar, WeatherCard, ConfigurationBar } from "../components";
+import ForecastList from './ForecastList'
+import { useAppContext } from "../context/AppContext";
 
 export function App() {
+  const { loading, current = [], forecast = [] } = useAppContext();
   return (
     <>
       <AppBar />
       <main className="flex flex-col items-center w-full h-full p-8">
         <SearchBar />
-        <section className="flex flex-col items-center justify-center mt-12 w-full">
-          <WeatherCard title="New York" temperature={25} condition="Sunny" />
+        <section className={`flex flex-col items-center justify-center mt-12 w-full ${loading ? "animate-pulse":""}`}>
+          <WeatherCard title={current?.city} temperature={Number.parseInt(current?.temperature)} condition={current?.condition} />
           <section className="flex items-center justify-between grid-cols-5 mt-8 w-full gap-4">
-            <WeatherCard title="Los Angeles" temperature={30} condition="Cloudy" />
-            <WeatherCard title="Chicago" temperature={20} condition="Rainy" />
-            <WeatherCard title="Miami" temperature={28} condition="Sunny" />
-            <WeatherCard title="Seattle" temperature={18} condition="Windy" />
-            <WeatherCard title="Denver" temperature={22} condition="Snowy" />
+            <ForecastList forecast={forecast} />
           </section>
         </section>
       </main>
