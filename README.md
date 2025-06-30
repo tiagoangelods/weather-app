@@ -155,4 +155,22 @@ weather-app/
           └── infra
 ```
 
-## ()
+## (TODO) shared-lib folder structure
+```markdown
+weather-app/
+  └── shared-lib/
+      ├── src/
+      │   ├── entities/
+      │   └── utils/
+```
+
+# Final thoughts
+- This project is a great example of how to build a full-stack application using modern technologies like React, TypeScript, and Node.js.
+- The use of monorepo allows for better code organization and management, making it easier to share code between the server and client.
+- The project can easily be extended with more features, such as user authentication, saving favorite cities, or integrating with other APIs.
+- The use of Tailwind CSS allows for rapid UI development and customization, making it easy to create a visually appealing application.
+- The project can be further optimized for performance, such as implementing server-side rendering (SSR) or static site generation (SSG) for the React application.
+
+
+![Final View](./assets/final-view.png)
+
