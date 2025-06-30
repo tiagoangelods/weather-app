@@ -1,11 +1,15 @@
-import {createContext, useContext, useState, useTransition} from 'react';
-import {currentWeather, forecastWeather, type weatherDto, WeatherService} from '@weather-app/shared-lib';
+import {createContext, useContext, useEffect, useState, useTransition} from 'react';
+import {currentWeather, forecastWeather, WeatherService} from '@weather-app/shared-lib';
 
 type AppContextType = {
+  city: string;
+  updateInterval: number;
   current: currentWeather;
   forecast: forecastWeather;
   loading: boolean;
-  fetchWeather: (city: string) => void;
+  fetchWeather: () => void;
+  setCity: (city: string) => void;
+  setUpdateInterval: (interval: number) => void;
 }
 const WEATHER_API_URL = import.meta.env.VITE_API_URL;
 const AppContext = createContext<AppContextType | null>(null);
@@ -19,12 +23,26 @@ export const useAppContext = (): AppContextType => {
 }
 
 export default function AppContextProvider({children}: {children: React.ReactNode}) {
+  const [city, setCity] = useState<string>('');
+  const [updateInterval, setUpdateInterval] = useState<number>(10); // in minutes
   const [current, setCurrent] = useState<currentWeather | null>(null);
   const [forecast, setForecast] = useState<forecastWeather | null>(null);
   const [loading, startTransition] = useTransition();
   const weatherService = new WeatherService(String(WEATHER_API_URL));
 
-  const fetchWeather = (city: string) => {
+  useEffect(() => {
+    
+    const intervalId = setInterval(() => {
+      if (city) {
+      fetchWeather();
+    }
+    }, updateInterval * 60 * 1000); // convert minutes to milliseconds
+    return () => clearInterval(intervalId);
+  }, [
+    updateInterval, city
+  ]);
+
+  const fetchWeather = () => {
     if (!city) {
       alert('Please enter a city name.');
       return;
@@ -45,8 +63,12 @@ export default function AppContextProvider({children}: {children: React.ReactNod
     <AppContext.Provider value={{
       current: current as unknown as currentWeather,
       forecast: forecast as unknown as forecastWeather,
+      city,
+      updateInterval,
       loading,
-      fetchWeather
+      fetchWeather,
+      setCity,
+      setUpdateInterval
     }}>
       {children}
     </AppContext.Provider>
