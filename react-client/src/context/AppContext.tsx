@@ -33,7 +33,7 @@ export default function AppContextProvider({children}: {children: React.ReactNod
   useEffect(() => {
     
     const intervalId = setInterval(() => {
-      if (city) {
+      if (city && updateInterval > 0) {
       fetchWeather();
     }
     }, updateInterval * 60 * 1000); // convert minutes to milliseconds
