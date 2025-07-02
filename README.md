@@ -49,6 +49,8 @@ The above acceptance criteria is the minimum requirement for the challenge. Extr
 the frontend app will run on `http://localhost:3000`
 the backend app will run on `http://localhost:4001`
 
+- To see de swagger docs go to `http://localhost:4001/docs`
+
 # Why monorepo?
 - Monorepo allows us to manage multiple projects in a single repository, making it easier to share code, manage dependencies, and maintain consistency across projects.
 - It simplifies the development process by allowing us to work on multiple applications and libraries simultaneously, reducing the overhead of managing separate repositories.
