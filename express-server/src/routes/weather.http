@@ -1,0 +1,3 @@
+### Test GET /weather endpoint
+GET http://localhost:4001/api/weather?city=London
+Accept: application/json

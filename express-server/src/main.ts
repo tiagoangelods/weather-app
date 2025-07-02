@@ -10,7 +10,7 @@ import {weatherRouter} from './routes';
 
 const app = express();
 app.use(cors({
-  origin: 'http://localhost:3000', // Replace with your frontend URL/port
+  origin: '*', // Replace with your frontend URL/port
 }))
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
