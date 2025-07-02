@@ -46,6 +46,9 @@ The above acceptance criteria is the minimum requirement for the challenge. Extr
     npx nx run-many --target=serve --all=true --parallel=3 --verbose=true
     ```
 
+the frontend app will run on `http://localhost:3000`
+the backend app will run on `http://localhost:4001`
+
 # Why monorepo?
 - Monorepo allows us to manage multiple projects in a single repository, making it easier to share code, manage dependencies, and maintain consistency across projects.
 - It simplifies the development process by allowing us to work on multiple applications and libraries simultaneously, reducing the overhead of managing separate repositories.
