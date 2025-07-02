@@ -27,7 +27,7 @@ The above acceptance criteria is the minimum requirement for the challenge. Extr
 ## How to run the project
 1. Clone the repository.
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/tiagoangelods/weather-app.git
     ```
 2. Navigate to the project directory.
     ```bash
